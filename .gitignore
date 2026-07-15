@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.secrets/
+data/
+test-results/
+coverage/
+.port-allocation.json
+.network-allocation.json
+*.log
+.DS_Store

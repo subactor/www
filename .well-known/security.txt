@@ -1,0 +1,3 @@
+Contact: mailto:security@subactor.com
+Preferred-Languages: en, pl
+Canonical: https://subactor.com/.well-known/security.txt
