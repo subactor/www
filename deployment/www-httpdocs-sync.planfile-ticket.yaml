@@ -65,4 +65,4 @@ tickets:
             apply: true
           depends_on:
             - www-httpdocs-sync-dry-run
-          human_approval: true
+          human_approval: false

@@ -99,16 +99,22 @@ LLM intent model: `www-httpdocs-sync.pl.aql`.
 ### Apply (explicit opt-in only)
 
 1. Dry-run must succeed and look correct.
-2. Vault entries `plesk-sftp` (and/or `plesk-ftp`) must exist.
+2. Vault entries `plesk-sftp` (preferred) and/or `plesk-ftp` must exist
+   (create via `plesk://host/ftpuser/command/ensure` with `kind=system`).
 3. Export confirmation env on the urirun-node host:
 
 ```bash
 export PLESK_SYNC_APPLY=1
 ```
 
-4. Re-run the same URI with `"apply": true` (human_approval on the ticket apply
-   step). Without `PLESK_SYNC_APPLY=1` the connector returns
+4. Re-run the same URI with `"apply": true`. Founder/admin autonomy contracts
+   should leave apply steps with `human_approval: false` when the env gate is
+   the safety boundary. Without `PLESK_SYNC_APPLY=1` the connector returns
    `plesk_sync_apply_required` and does not upload.
+
+OpenRouter / `subactor ask` is only needed for NL → plan routing. FTP/SFTP
+ensure + sync are deterministic connector calls — platform orchestrates them
+without an LLM once the URI/plan is known.
 
 ### Manual fallback
 

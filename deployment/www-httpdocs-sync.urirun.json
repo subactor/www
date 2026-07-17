@@ -1,7 +1,7 @@
 {
   "id": "www-httpdocs-sync",
   "name": "Sync www → Plesk httpdocs (subactor.com)",
-  "description": "Dry-run first, then human-approved apply via plesk://host/site/command/sync. Requires vault SFTP/FTP credentials and PLESK_SYNC_APPLY=1 for the apply step.",
+  "description": "Dry-run first, then apply via plesk://host/site/command/sync. Safety gate is PLESK_SYNC_APPLY=1 (not human_approval) so founder/admin can run autonomously.",
   "situation": {
     "source_dir": "/home/tom/github/subactor/www",
     "host": "prototypowanie.pl",
@@ -47,7 +47,7 @@
         "apply": true
       },
       "depends_on": ["www-httpdocs-sync-dry-run"],
-      "human_approval": true
+      "human_approval": false
     }
   ]
 }
