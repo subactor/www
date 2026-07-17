@@ -1,0 +1,53 @@
+{
+  "id": "www-httpdocs-sync",
+  "name": "Sync www → Plesk httpdocs (subactor.com)",
+  "description": "Dry-run first, then human-approved apply via plesk://host/site/command/sync. Requires vault SFTP/FTP credentials and PLESK_SYNC_APPLY=1 for the apply step.",
+  "situation": {
+    "source_dir": "/home/tom/github/subactor/www",
+    "host": "prototypowanie.pl",
+    "domain": "subactor.com"
+  },
+  "uri_processes": [
+    {
+      "id": "www-httpdocs-methods",
+      "name": "Detect SFTP/FTP deployment transports",
+      "actor": "bot:project-operator-bot",
+      "uri": "plesk://host/site/query/methods",
+      "payload": {
+        "host": "prototypowanie.pl"
+      },
+      "depends_on": [],
+      "human_approval": false
+    },
+    {
+      "id": "www-httpdocs-sync-dry-run",
+      "name": "Dry-run www → httpdocs sync plan",
+      "actor": "bot:project-operator-bot",
+      "uri": "plesk://host/site/command/sync",
+      "payload": {
+        "source_dir": "/home/tom/github/subactor/www",
+        "remote_path": "/httpdocs",
+        "host": "prototypowanie.pl",
+        "domain": "subactor.com",
+        "apply": false
+      },
+      "depends_on": ["www-httpdocs-methods"],
+      "human_approval": false
+    },
+    {
+      "id": "www-httpdocs-sync-apply",
+      "name": "Apply www → httpdocs sync",
+      "actor": "bot:project-operator-bot",
+      "uri": "plesk://host/site/command/sync",
+      "payload": {
+        "source_dir": "/home/tom/github/subactor/www",
+        "remote_path": "/httpdocs",
+        "host": "prototypowanie.pl",
+        "domain": "subactor.com",
+        "apply": true
+      },
+      "depends_on": ["www-httpdocs-sync-dry-run"],
+      "human_approval": true
+    }
+  ]
+}
