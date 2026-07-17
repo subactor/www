@@ -1,0 +1,68 @@
+# Versioned copy of umbrella planfile import for www→httpdocs sync.
+# Import on umbrella: planfile ticket import --source urirun-recipe --from .planfile/imports/www-httpdocs-sync.yaml
+# Canonical urirun recipe: www/deployment/www-httpdocs-sync.urirun.json
+tickets:
+  - name: Sync www → subactor.com httpdocs
+    description: |
+      Dry-run first via plesk://host/site/command/sync (recipe www-httpdocs-sync.urirun.json),
+      then human-approved apply only when PLESK_SYNC_APPLY=1 is set on the urirun-node host.
+
+      Situation defaults: source_dir=/home/tom/github/subactor/www, host=prototypowanie.pl, domain=subactor.com.
+      Do not apply to production unless dry-run is green and PLESK_SYNC_APPLY is explicitly set.
+    priority: high
+    labels:
+      - plesk
+      - www-httpdocs-sync
+      - urirun-recipe
+      - llm-ready
+    files:
+      - www/deployment/www-httpdocs-sync.urirun.json
+      - www/deployment/PLESK.md
+      - contracts/models/www-httpdocs-sync.pl.aql
+      - agents/nlp-uri-phrases.yaml
+    executor:
+      kind: llm
+      mode: interactive
+    execution:
+      queue: default
+      state: ready
+      attempt: 0
+      max_attempts: 3
+    inputs:
+      env_keys:
+        - PLESK_SYNC_APPLY
+      uri_processes:
+        - id: www-httpdocs-methods
+          name: Detect SFTP/FTP deployment transports
+          actor: bot:project-operator-bot
+          uri: plesk://host/site/query/methods
+          payload:
+            host: prototypowanie.pl
+          depends_on: []
+          human_approval: false
+        - id: www-httpdocs-sync-dry-run
+          name: Dry-run www → httpdocs sync plan
+          actor: bot:project-operator-bot
+          uri: plesk://host/site/command/sync
+          payload:
+            source_dir: /home/tom/github/subactor/www
+            remote_path: /httpdocs
+            host: prototypowanie.pl
+            domain: subactor.com
+            apply: false
+          depends_on:
+            - www-httpdocs-methods
+          human_approval: false
+        - id: www-httpdocs-sync-apply
+          name: Apply www → httpdocs sync (requires PLESK_SYNC_APPLY=1)
+          actor: bot:project-operator-bot
+          uri: plesk://host/site/command/sync
+          payload:
+            source_dir: /home/tom/github/subactor/www
+            remote_path: /httpdocs
+            host: prototypowanie.pl
+            domain: subactor.com
+            apply: true
+          depends_on:
+            - www-httpdocs-sync-dry-run
+          human_approval: true

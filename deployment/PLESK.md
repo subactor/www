@@ -33,18 +33,51 @@ apply dispatches the URI when `TASK_RUNTIME_ENABLED` + urirun-node are up).
 
 ### Dry-run (safe default)
 
+Confirm apply gate is off first (`PLESK_SYNC_APPLY` must be empty / unset).
+
+**Exact local dry-run (connector package, no remote write):**
+
 ```bash
-# Via panel / bridge process.run, or urirun CLI against the node registry:
-# payload apply=false — never writes remote files
+cd /home/tom/github/urirun-connectors/urirun-connector-plesk
+PYTHONPATH=. python3 -c '
+from urirun_connector_plesk.core import site_sync
+import json, os
+assert not os.environ.get("PLESK_SYNC_APPLY"), "refuse: PLESK_SYNC_APPLY set"
+r = site_sync(
+  source_dir="/home/tom/github/subactor/www",
+  remote_path="/httpdocs",
+  host="prototypowanie.pl",
+  domain="subactor.com",
+  apply=False,
+)
+print(json.dumps({k: r[k] for k in ("ok","dry_run","files_planned","domain","host","remote_path","preserve_remote") if k in r}, indent=2))
+'
+```
+
+**Bridge OQL planner (same allowlist / hashes, also dry-run):**
+
+```bash
+cd /home/tom/github/subactor/connectors/services/bridge
+node --input-type=module -e '
+import { planHttpdocsSync } from "./src/plesk-httpdocs-sync.mjs";
+const r = await planHttpdocsSync({
+  sourceDir: "/home/tom/github/subactor/www",
+  remotePath: "/httpdocs",
+  host: "prototypowanie.pl",
+  domain: "subactor.com",
+  apply: false,
+});
+console.log(JSON.stringify({ok:r.ok, dry_run:r.dry_run, files_planned:r.files_planned, uri_process:r.uri_process}, null, 2));
+'
 ```
 
 ```json
 {
   "uri": "plesk://host/site/command/sync",
   "payload": {
-    "source_dir": "/absolute/path/to/www",
+    "source_dir": "/home/tom/github/subactor/www",
     "remote_path": "/httpdocs",
-    "host": "YOUR_PLESK_SSH_HOST",
+    "host": "prototypowanie.pl",
     "domain": "subactor.com",
     "apply": false
   }
@@ -54,8 +87,14 @@ apply dispatches the URI when `TASK_RUNTIME_ENABLED` + urirun-node are up).
 Source must be a directory named `www`, or under
 `PLESK_SYNC_ALLOWED_SOURCES` (colon-separated prefixes).
 
-Reusable Planfile recipe: see `www-httpdocs-sync.urirun.json` and step-catalog
-modules `sync_www_httpdocs_dry_run` / `create_www_httpdocs_sync_ticket`.
+Reusable Planfile recipe: `www-httpdocs-sync.urirun.json`. Ticket import:
+`www-httpdocs-sync.planfile-ticket.yaml` (or umbrella
+`.planfile/imports/www-httpdocs-sync.yaml`). Step-catalog modules:
+`sync_www_httpdocs_dry_run` / `create_www_httpdocs_sync_ticket`.
+
+**NL (subactor-local, not desktop nlp2uri):** phrases in
+`agents/nlp-uri-phrases.yaml` → `plesk://host/site/command/sync` (apply=false).
+LLM intent model: `www-httpdocs-sync.pl.aql`.
 
 ### Apply (explicit opt-in only)
 
