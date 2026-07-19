@@ -1,5 +1,11 @@
 # www.sub.actor
 
+## Status (2026-07-19)
+
+Kanoniczny publiczny serwis jest dostępny jako [subactor.com](https://subactor.com).
+Publikacja odbywa się przez generyczny zasób `workspace:www`, dry-run, podpisany
+apply grant, SFTP i weryfikację manifestu; repo nie przechowuje credentiali.
+
 
 usługa świadczona przez partnerów na zasadzie delegowania zadań dla podaktorów w organizacjach, projektach, zadaniach.
 Istotą jest umawianie się na kooperację w przyjętej roli a nie tylko w zakresie zadań.
