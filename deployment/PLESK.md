@@ -103,16 +103,33 @@ LLM intent model: `www-httpdocs-sync.pl.aql`.
 1. Dry-run must succeed and look correct.
 2. Vault entries `plesk-sftp` (preferred) and/or `plesk-ftp` must exist
    (create via `plesk://host/ftpuser/command/ensure` with `kind=system`).
-3. Export confirmation env on the urirun-node host:
+3. Open one bounded mutation window: either set both kill switches on the
+   urirun-node host:
 
 ```bash
+export AUTONOMY_MUTATIONS_ENABLED=1
 export PLESK_SYNC_APPLY=1
 ```
 
-4. Re-run the same URI with `"apply": true`. Founder/admin autonomy contracts
-   should leave apply steps with `human_approval: false` when the env gate is
-   the safety boundary. Without `PLESK_SYNC_APPLY=1` the connector returns
-   `plesk_sync_apply_required` and does not upload.
+   or use the Founder CLI's short-lived mutate lease. Do not leave either
+   mechanism enabled permanently.
+
+4. Issue a signed, single-use apply grant bound to the unchanged dry-run
+   `plan_hash`, exact target, actor and intent pack. The grant is an ephemeral
+   credential: pass it directly to the runtime and never persist it in a ticket,
+   manifest, log or repository.
+
+5. Re-run the same URI with `"apply": true`, the exact `plan_hash` and the
+   grant. The supported autonomous route is:
+
+```bash
+cd /home/tom/github/subactor/platform
+node packages/founder-cli/bin/subactor.mjs ask "opublikuj www na subactor.com" --apply --yes
+```
+
+The Bridge request timeout must be at least the configured Plesk transport
+budget plus verification overhead. The current runtime derives it from
+`PLESK_TRANSPORT_TOTAL_BUDGET` and adds 15 seconds.
 
 OpenRouter / `subactor ask` is only needed for NL → plan routing. FTP/SFTP
 ensure + sync are deterministic connector calls — platform orchestrates them
