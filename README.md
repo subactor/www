@@ -1,4 +1,4 @@
-# www.sub.actor
+# subactor.com
 
 ## Status (2026-07-19)
 
@@ -19,4 +19,4 @@ rozliczenia checklsty w formacie [veridock](http://www.veridock.com) w oparciu o
 
 ---
 
-+ [edit](https://github.com/subactor/www/edit/main/README.md)
++ [edit](https://github.com/subactor/subactor-com/edit/main/README.md)

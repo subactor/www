@@ -1,13 +1,13 @@
 # Versioned copy of umbrella planfile import for www→httpdocs sync.
 # Import on umbrella: planfile ticket import --source urirun-recipe --from .planfile/imports/www-httpdocs-sync.yaml
-# Canonical urirun recipe: www/deployment/www-httpdocs-sync.urirun.json
+# Canonical urirun recipe: subactor-com/deployment/www-httpdocs-sync.urirun.json
 tickets:
   - name: Sync www → subactor.com httpdocs
     description: |
       Dry-run first via plesk://host/site/command/sync (recipe www-httpdocs-sync.urirun.json),
       then human-approved apply only when PLESK_SYNC_APPLY=1 is set on the urirun-node host.
 
-      Situation defaults: source_dir=/home/tom/github/subactor/www, host=prototypowanie.pl, domain=subactor.com.
+      Situation defaults: source_dir=/home/tom/github/subactor/subactor-com, host=prototypowanie.pl, domain=subactor.com.
       Do not apply to production unless dry-run is green and PLESK_SYNC_APPLY is explicitly set.
     priority: high
     labels:
@@ -16,8 +16,8 @@ tickets:
       - urirun-recipe
       - llm-ready
     files:
-      - www/deployment/www-httpdocs-sync.urirun.json
-      - www/deployment/PLESK.md
+      - subactor-com/deployment/www-httpdocs-sync.urirun.json
+      - subactor-com/deployment/PLESK.md
       - contracts/models/www-httpdocs-sync.pl.aql
       - agents/nlp-uri-phrases.yaml
     executor:
@@ -45,7 +45,7 @@ tickets:
           actor: bot:project-operator-bot
           uri: plesk://host/site/command/sync
           payload:
-            source_dir: /home/tom/github/subactor/www
+            source_dir: /home/tom/github/subactor/subactor-com
             remote_path: /httpdocs
             host: prototypowanie.pl
             domain: subactor.com
@@ -58,7 +58,7 @@ tickets:
           actor: bot:project-operator-bot
           uri: plesk://host/site/command/sync
           payload:
-            source_dir: /home/tom/github/subactor/www
+            source_dir: /home/tom/github/subactor/subactor-com
             remote_path: /httpdocs
             host: prototypowanie.pl
             domain: subactor.com

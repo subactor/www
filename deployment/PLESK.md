@@ -39,12 +39,13 @@ Confirm apply gate is off first (`PLESK_SYNC_APPLY` must be empty / unset).
 
 ```bash
 cd /home/tom/github/urirun-connectors/urirun-connector-plesk
+export PLESK_SYNC_ALLOWED_SOURCES=/home/tom/github/subactor
 PYTHONPATH=. python3 -c '
 from urirun_connector_plesk.core import site_sync
 import json, os
 assert not os.environ.get("PLESK_SYNC_APPLY"), "refuse: PLESK_SYNC_APPLY set"
 r = site_sync(
-  source_dir="/home/tom/github/subactor/www",
+  source_dir="/home/tom/github/subactor/subactor-com",
   remote_path="/httpdocs",
   host="prototypowanie.pl",
   domain="subactor.com",
@@ -61,7 +62,7 @@ cd /home/tom/github/subactor/connectors/services/bridge
 node --input-type=module -e '
 import { planHttpdocsSync } from "./src/plesk-httpdocs-sync.mjs";
 const r = await planHttpdocsSync({
-  sourceDir: "/home/tom/github/subactor/www",
+  sourceDir: "/home/tom/github/subactor/subactor-com",
   remotePath: "/httpdocs",
   host: "prototypowanie.pl",
   domain: "subactor.com",
@@ -75,7 +76,7 @@ console.log(JSON.stringify({ok:r.ok, dry_run:r.dry_run, files_planned:r.files_pl
 {
   "uri": "plesk://host/site/command/sync",
   "payload": {
-    "source_dir": "/home/tom/github/subactor/www",
+    "source_dir": "/home/tom/github/subactor/subactor-com",
     "remote_path": "/httpdocs",
     "host": "prototypowanie.pl",
     "domain": "subactor.com",
@@ -84,8 +85,9 @@ console.log(JSON.stringify({ok:r.ok, dry_run:r.dry_run, files_planned:r.files_pl
 }
 ```
 
-Source must be a directory named `www`, or under
-`PLESK_SYNC_ALLOWED_SOURCES` (colon-separated prefixes).
+Source must be under `PLESK_SYNC_ALLOWED_SOURCES` (colon-separated prefixes).
+The canonical source is `/home/tom/github/subactor/subactor-com`; the logical
+resource alias remains `workspace:www` for backward-compatible founder commands.
 
 Reusable Planfile recipe: `www-httpdocs-sync.urirun.json`. Ticket import:
 `www-httpdocs-sync.planfile-ticket.yaml` (or umbrella

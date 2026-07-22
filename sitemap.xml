@@ -1,1 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://subactor.com/</loc></url><url><loc>https://subactor.com/pl/</loc></url></urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://subactor.com/</loc></url>
+  <url><loc>https://subactor.com/pl/</loc></url>
+  <url><loc>https://subactor.com/pl/porownanie/</loc></url>
+  <url><loc>https://subactor.com/pl/porownanie/camunda/</loc></url>
+  <url><loc>https://subactor.com/pl/porownanie/temporal/</loc></url>
+  <url><loc>https://subactor.com/pl/porownanie/conductor/</loc></url>
+  <url><loc>https://subactor.com/pl/porownanie/agent-contracts/</loc></url>
+  <url><loc>https://subactor.com/pl/porownanie/microsoft-agent-governance-toolkit/</loc></url>
+  <url><loc>https://subactor.com/pl/porownanie/openagentgovernance/</loc></url>
+  <url><loc>https://subactor.com/pl/porownanie/governance-as-a-service/</loc></url>
+  <url><loc>https://subactor.com/pl/porownanie/cybertron/</loc></url>
+</urlset>

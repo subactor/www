@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Subactor a inne systemy — porównanie Organization OS</title>
+  <meta name="description" content="Źródłowe porównanie Subactor z Camunda, Temporal, Conductor, Agent Contracts, Microsoft AGT, ADP, GaaS i Cybertron.">
+  <link rel="canonical" href="https://subactor.com/pl/porownanie/"><link rel="icon" href="../../assets/brand/favicon.svg"><link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body>
+<header class="nav"><div class="container nav-inner"><a class="brand" href="../../"><img src="../../assets/brand/subactor-horizontal-inverse.svg" alt="Subactor"></a><nav class="nav-links" data-nav-links><a href="../">Strona główna</a><a href="#matrix">Macierz</a><a href="#systems">Systemy</a><a href="mailto:hello@subactor.com">Kontakt</a></nav><div class="nav-actions"><a class="lang" href="../../">EN</a><button class="menu-button" data-menu aria-expanded="false" aria-label="Otwórz menu">☰</button></div></div></header>
+<main>
+  <section class="compare-hero"><div class="container"><div class="breadcrumbs"><a href="../">Subactor</a><span>/</span><span>Porównanie systemów</span></div><div class="eyebrow" style="margin-top:28px">ANALIZA ŹRÓDŁOWA · 22.07.2026</div><h1>Organizacyjny OS z kontraktami dla ludzi i maszyn.</h1><p>Nie ma dziś jednego odpowiednika Subactor 1:1. Najbliższe możliwości są rozdzielone między silniki procesów, durable execution, formalne kontrakty agentów i warstwy governance. Porównujemy zakres, a nie marketingowe etykiety.</p></div></section>
+  <section class="section"><div class="container">
+    <div class="verdict"><strong>Najważniejszy wniosek</strong><p>Camunda jest najbliżej formalnego procesu ludzi i systemów; Temporal i Conductor są najmocniejsze jako trwałe runtime'y; Agent Contracts, Microsoft AGT i ADP dostarczają wyspecjalizowane mechanizmy governance. Subactor łączy te klasy z domenowymi rekordami organizacji, routingiem odpowiedzialności i dowodem wyniku.</p></div>
+    <h2 id="matrix">Macierz zakresu</h2>
+    <p class="notice">Ocena oznacza deklarowany zakres produktu lub projektu, nie niezależny benchmark jakości. „Częściowo” często oznacza, że funkcję trzeba zbudować w kodzie workflow albo dołączyć jako osobny komponent.</p>
+    <div class="matrix-wrap"><table class="matrix">
+      <thead><tr><th>System</th><th>Klasa</th><th>Ludzie + maszyny</th><th>Governance akcji</th><th>Domeny organizacji</th><th>Stan</th></tr></thead>
+      <tbody>
+        <tr><td><a href="camunda/"><strong>Camunda</strong></a></td><td>BPMN/DMN</td><td>Tak</td><td>Proces i autoryzacja</td><td>Do zbudowania</td><td><span class="status-pill">produkt</span></td></tr>
+        <tr><td><a href="temporal/"><strong>Temporal</strong></a></td><td>Durable execution</td><td>Częściowo, w kodzie</td><td>Do zbudowania</td><td>Do zbudowania</td><td><span class="status-pill">produkt</span></td></tr>
+        <tr><td><a href="conductor/"><strong>Conductor</strong></a></td><td>Workflow runtime</td><td>Tak, zadanie HUMAN</td><td>Gates i historia</td><td>Do zbudowania</td><td><span class="status-pill">OSS</span></td></tr>
+        <tr><td><a href="agent-contracts/"><strong>Agent Contracts</strong></a></td><td>Kontrakty zasobowe</td><td>Agenci</td><td>Budżety i lifecycle</td><td>Nie</td><td><span class="status-pill preview">wczesny OSS</span></td></tr>
+        <tr><td><a href="microsoft-agent-governance-toolkit/"><strong>Microsoft AGT</strong></a></td><td>Runtime governance</td><td>Agenci + approvers</td><td>Tak, deterministyczne</td><td>Nie</td><td><span class="status-pill preview">public preview</span></td></tr>
+        <tr><td><a href="openagentgovernance/"><strong>ADP</strong></a></td><td>Standard decyzji</td><td>Agenci + approvers</td><td>Macierz autoryzacji</td><td>Rejestr agentów</td><td><span class="status-pill preview">otwarty standard</span></td></tr>
+        <tr><td><a href="governance-as-a-service/"><strong>GaaS</strong></a></td><td>Framework polityk</td><td>Głównie agenci</td><td>Intercepcja runtime</td><td>Nie</td><td><span class="status-pill preview">badania</span></td></tr>
+        <tr><td><a href="cybertron/"><strong>Cybertron</strong></a></td><td>Wzorzec dokumentowy</td><td>Tak, role</td><td>Reguły w Markdown</td><td>Role projektowe</td><td><span class="status-pill preview">wczesny wzorzec</span></td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+  <section id="systems" class="section alt"><div class="container"><div class="section-head"><div><div class="eyebrow">OSOBNE ANALIZY</div><h2>Osiem różnych odpowiedzi na ten sam problem.</h2></div><p>Każda analiza wskazuje wspólny zakres, zasadnicze różnice, ograniczenia i przypadek, w którym warto wybrać lub połączyć dany system z Subactor.</p></div><div class="compare-grid">
+    <a class="card compare-card" href="camunda/"><div><span class="category">Procesy</span><h3>Camunda</h3><p>BPMN/DMN, zadania człowieka i agenci.</p></div><span class="arrow">Czytaj →</span></a>
+    <a class="card compare-card" href="temporal/"><div><span class="category">Durability</span><h3>Temporal</h3><p>Trwałe wykonanie kodowych workflow.</p></div><span class="arrow">Czytaj →</span></a>
+    <a class="card compare-card" href="conductor/"><div><span class="category">Orkiestracja</span><h3>Conductor</h3><p>JSON workflow, LLM, MCP i HUMAN.</p></div><span class="arrow">Czytaj →</span></a>
+    <a class="card compare-card" href="agent-contracts/"><div><span class="category">Kontrakty</span><h3>Agent Contracts</h3><p>Budżety, czas, sukces i zakończenie.</p></div><span class="arrow">Czytaj →</span></a>
+    <a class="card compare-card" href="microsoft-agent-governance-toolkit/"><div><span class="category">Enforcement</span><h3>Microsoft AGT</h3><p>Polityka na granicy każdej akcji agenta.</p></div><span class="arrow">Czytaj →</span></a>
+    <a class="card compare-card" href="openagentgovernance/"><div><span class="category">Standard</span><h3>OpenAgentGovernance</h3><p>Decyzje, autonomia, ryzyko i audyt.</p></div><span class="arrow">Czytaj →</span></a>
+    <a class="card compare-card" href="governance-as-a-service/"><div><span class="category">Badania</span><h3>Governance-as-a-Service</h3><p>Governance jako osobna usługa runtime.</p></div><span class="arrow">Czytaj →</span></a>
+    <a class="card compare-card" href="cybertron/"><div><span class="category">Wzorzec</span><h3>Cybertron</h3><p>Konstytucja, protokół i role w repo.</p></div><span class="arrow">Czytaj →</span></a>
+  </div></div></section>
+  <section class="cta"><div class="container"><div class="cta-box"><div class="eyebrow" style="color:#07111F">METODA</div><h2>Porównanie oparte na dokumentacji pierwotnej, bez syntetycznego rankingu.</h2><p>Zakres i dojrzałość projektów zmieniają się szybko. Źródła zweryfikowano 22 lipca 2026; każda podstrona podaje własne odnośniki.</p></div></div></section>
+</main>
+<footer><div class="container footer-grid"><div>© <span data-year></span> Subactor.</div><div class="footer-links"><a href="../">Strona główna</a><a href="mailto:hello@subactor.com">Kontakt</a></div></div></footer><script src="../../assets/js/app.js" defer></script>
+</body></html>

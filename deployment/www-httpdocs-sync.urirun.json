@@ -3,7 +3,7 @@
   "name": "Sync www → Plesk httpdocs (subactor.com)",
   "description": "Dry-run first, then apply via plesk://host/site/command/sync. Safety gate is PLESK_SYNC_APPLY=1 (not human_approval) so founder/admin can run autonomously.",
   "situation": {
-    "source_dir": "/home/tom/github/subactor/www",
+    "source_dir": "/home/tom/github/subactor/subactor-com",
     "host": "prototypowanie.pl",
     "domain": "subactor.com"
   },
@@ -25,7 +25,7 @@
       "actor": "bot:project-operator-bot",
       "uri": "plesk://host/site/command/sync",
       "payload": {
-        "source_dir": "/home/tom/github/subactor/www",
+        "source_dir": "/home/tom/github/subactor/subactor-com",
         "remote_path": "/httpdocs",
         "host": "prototypowanie.pl",
         "domain": "subactor.com",
@@ -40,7 +40,7 @@
       "actor": "bot:project-operator-bot",
       "uri": "plesk://host/site/command/sync",
       "payload": {
-        "source_dir": "/home/tom/github/subactor/www",
+        "source_dir": "/home/tom/github/subactor/subactor-com",
         "remote_path": "/httpdocs",
         "host": "prototypowanie.pl",
         "domain": "subactor.com",
